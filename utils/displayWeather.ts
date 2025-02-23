@@ -5,7 +5,7 @@ import weatherDescriptions from "../maps/weather_descriptions.json" with { type:
 import weatherIcons from "../maps/weather_icons.json" with { type: "json" };
 import { calculateFeelsLike } from "./calculateFeelsLike.ts";
 
-export function displayWeather(data: WeatherResponse) {
+export function displayWeather(data: WeatherResponse, location?: any) {
   const weatherCode = data.current.weather_code;
   const temp = data.current.temperature_2m;
   const windSpeed = data.current.wind_speed_10m;
@@ -18,13 +18,12 @@ export function displayWeather(data: WeatherResponse) {
   const weatherText = weatherDescriptions[weatherCode] || { en: "Unknown", zh: "未知" };
   const clothingSuggestion = getClothingSuggestion(feelsLike, weatherCode);
 
-  console.log(`🌍 Location: ${data.latitude}, ${data.longitude} (${data.timezone})`);
-  console.log(`${weatherIcons[weatherCode] || "❓"} ${weatherText.en} / ${weatherText.zh}`);
-  console.log(`🌡️ Temperature: ${temp}°C`);
+  console.log(`${weatherIcons[weatherCode] || "❓"}  ${weatherText.en} / ${weatherText.zh}`);
+  console.log(`🌍 Location: ${location ? location.city : `${data.latitude}, ${data.longitude}`} (${data.timezone_abbreviation}, ${data.timezone})`);
+  console.log(`🌡️  Temperature: ${temp}°C (Feels like ${feelsLike.toFixed(1)}°C)`);
   console.log(`💦 Humidity: ${humidity}%`);
-  console.log(`🌡️ Feels-Like: ${feelsLike.toFixed(1)}°C`);
-  console.log(`${clothingSuggestion}`);
   console.log(`💨 Wind: ${windSpeed} m/s ${windDirection}`);
+  console.log(`${clothingSuggestion}`);
   console.log(`🌅 Sunrise: ${sunrise}`);
   console.log(`🌇 Sunset: ${sunset}`);
 }

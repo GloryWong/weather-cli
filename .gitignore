@@ -97,3 +97,5 @@ typings/
 _dist
 
 .cache_*
+
+.bin

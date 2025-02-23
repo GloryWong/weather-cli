@@ -7,7 +7,7 @@ import { fetchWithCache } from "./fetchWithCache.ts";
 export async function fetchLocationData() {
   try {
     const data = await fetchWithCache(GEO_BASE_URL);
-    return { lat: data.lat, lon: data.lon }
+    return data
   } catch {
     return null
   }

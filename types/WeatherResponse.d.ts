@@ -2,6 +2,7 @@ interface WeatherResponse {
   latitude: number;
   longitude: number;
   timezone: string;
+  timezone_abbreviation: string;
   current: {
     temperature_2m: number;
     weather_code: number;
