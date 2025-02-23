@@ -1,0 +1,18 @@
+{
+  "0": { "en": "Clear sky", "zh": "晴朗" },
+  "1": { "en": "Mainly clear", "zh": "大致晴朗" },
+  "2": { "en": "Partly cloudy", "zh": "局部多云" },
+  "3": { "en": "Overcast", "zh": "阴天" },
+  "45": { "en": "Foggy", "zh": "有雾" },
+  "48": { "en": "Depositing rime fog", "zh": "霜雾" },
+  "51": { "en": "Light drizzle", "zh": "小毛毛雨" },
+  "53": { "en": "Moderate drizzle", "zh": "中毛毛雨" },
+  "55": { "en": "Heavy drizzle", "zh": "大毛毛雨" },
+  "61": { "en": "Light rain", "zh": "小雨" },
+  "63": { "en": "Moderate rain", "zh": "中雨" },
+  "65": { "en": "Heavy rain", "zh": "大雨" },
+  "71": { "en": "Light snow", "zh": "小雪" },
+  "73": { "en": "Moderate snow", "zh": "中雪" },
+  "75": { "en": "Heavy snow", "zh": "大雪" },
+  "95": { "en": "Thunderstorms", "zh": "雷暴" }
+}
