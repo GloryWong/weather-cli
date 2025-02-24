@@ -52,4 +52,4 @@ jobs:
       - name: Upload binaries
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh release upload ${{ matrix.target }}-${{ needs.release-please.outputs.tag_name }} ./weather-cli
+        run: gh release upload ${{ needs.release-please.outputs.tag_name }} weather-cli#${{ matrix.target }}_${{ needs.release-please.outputs.tag_name }} --clobber
