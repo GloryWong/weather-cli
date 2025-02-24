@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.17](https://github.com/GloryWong/weather-cli/compare/v1.0.16...v1.0.17) (2025-02-24)
+
+
+### Bug Fixes
+
+* update docs ([dfbf787](https://github.com/GloryWong/weather-cli/commit/dfbf78777b38b7635c944c1cbde5ddac82f8247e))
+
 ## [1.0.16](https://github.com/GloryWong/weather-cli/compare/v1.0.15...v1.0.16) (2025-02-24)
 
 
