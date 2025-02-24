@@ -13,13 +13,18 @@ Usage: weather [options]
 Options:
   --weather <lat> <lon>   Fetch weather data for given latitude & longitude
   --location              Fetch location data based on IP
+  --force, -f             Skip cache and fetch new data
   --help, -h              Show this help message
+
+Note: data is cached for 5 minutes. Use --force to skip cache.
 `);
     return;
   }
 
+  const force = args.includes('--force') || args.includes('-f')
+
   if (args.includes("--location")) {
-    const location = await fetchLocationData();
+    const location = await fetchLocationData(force);
     console.log("📍 Your Location:");
     console.log(`City: ${location.city}`);
     console.log(`Region: ${location.regionName}`);
@@ -43,18 +48,18 @@ Options:
       return;
     }
 
-    const weather = await fetchWeatherData(lat, lon);
+    const weather = await fetchWeatherData(lat, lon, force);
     displayWeather(weather)
     return;
   }
 
-  const location = await fetchLocationData();
+  const location = await fetchLocationData(force);
   if (!location) {
     console.log("❌ Could not detect your location.");
     Deno.exit(1);
   }
   
-  const weather = await fetchWeatherData(location.lat, location.lon);
+  const weather = await fetchWeatherData(location.lat, location.lon, force);
   displayWeather(weather, location)
 }
 

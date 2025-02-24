@@ -1,10 +1,20 @@
+import { EOL } from "@std/fs";
 import { CACHE_EXPIRY_MS } from "../constants/index.ts";
 import { readCache } from "./readCache.ts";
 import { writeCache } from "./writeCache.ts";
 
-export async function fetchWithCache(url: string) {
+async function fetchData(url: string) {
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error(`API error: ${response.status} ${response.statusText}`);
+  }
+
+  return response.json();
+}
+
+export async function fetchWithCache(url: string, force = false) {
   const now = Date.now();
-  const cache = await readCache(url);
+  const cache = force ? null : await readCache(url);
   
   // Returning cached data
   if (cache && now - cache.timestamp < CACHE_EXPIRY_MS) {
@@ -24,8 +34,13 @@ export async function fetchWithCache(url: string) {
     await writeCache(url, data);
   
     return data;
-  } catch (error: any) {
-    console.error(`⚠️ Network error(${error.message})! Loading cached weather data...`);
+  } catch {
+    if (force) {
+      console.error(`⚠️ Network error!`);
+      return
+    }
+
+    console.error(`⚠️ Network error! Loading cached weather data...`);
     if (cache && cache.data) {
       return cache.data
     } else {
