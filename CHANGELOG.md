@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/GloryWong/weather-cli/compare/v1.0.18...v1.1.0) (2025-02-24)
+
+
+### Features
+
+* support forcing fetching the latest data ([c80527e](https://github.com/GloryWong/weather-cli/commit/c80527eef9a7fcbdf865172eb6d24ca20a04a042))
+
 ## [1.0.18](https://github.com/GloryWong/weather-cli/compare/v1.0.17...v1.0.18) (2025-02-24)
 
 
