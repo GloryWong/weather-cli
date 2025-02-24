@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/GloryWong/weather-cli/compare/v1.0.0...v1.0.1) (2025-02-24)
+
+
+### Bug Fixes
+
+* **ci:** node_modules management mode for npm packages ([fdb19db](https://github.com/GloryWong/weather-cli/commit/fdb19db719d1b4ba5d3717bc1cd5be8804e29180))
+
 ## 1.0.0 (2025-02-24)
 
 
