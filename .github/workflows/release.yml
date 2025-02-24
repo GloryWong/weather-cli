@@ -25,6 +25,7 @@ jobs:
           release-type: node
     outputs:
       release_created: ${{ steps.release.outputs.release_created }}
+      tag_name: ${{ steps.release.outputs.tag_name }}
 
   upload-binaries:
     needs: release-please
@@ -48,8 +49,7 @@ jobs:
           deno compile --allow-net --allow-read --allow-write --no-check --target ${{ matrix.target }} --output weather-cli cli.ts
           echo "Compiled for ${{ matrix.target }}"
 
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ matrix.target }}
-          path: weather-cli
+      - name: Upload binaries
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh release upload ${{ matrix.target }}-${{ steps.release.outputs.tag_name }} ./weather-cli
