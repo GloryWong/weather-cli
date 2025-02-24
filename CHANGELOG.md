@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.16](https://github.com/GloryWong/weather-cli/compare/v1.0.15...v1.0.16) (2025-02-24)
+
+
+### Bug Fixes
+
+* ci remove tag_name from tarball & update readme ([2eda10a](https://github.com/GloryWong/weather-cli/commit/2eda10a665562cd4265b013f0e68986550582f2a))
+
 ## [1.0.15](https://github.com/GloryWong/weather-cli/compare/v1.0.14...v1.0.15) (2025-02-24)
 
 
