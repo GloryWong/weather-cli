@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.4](https://github.com/GloryWong/weather-cli/compare/v1.0.3...v1.0.4) (2025-02-24)
+
+
+### Bug Fixes
+
+* **cli:** file names for release upload ([356ff50](https://github.com/GloryWong/weather-cli/commit/356ff50d9d0ca37ff2ab18a1c1d50726923d03df))
+
 ## [1.0.3](https://github.com/GloryWong/weather-cli/compare/v1.0.2...v1.0.3) (2025-02-24)
 
 
