@@ -63,7 +63,9 @@ jobs:
           gh release upload ${{ needs.release-please.outputs.tag_name }} $ASSET_NAME
   
   update-homebrew:
-    needs: upload-binaries
+    needs:
+      - release-please
+      - upload-binaries
     if: needs.release-please.outputs.release_created
     runs-on: ubuntu-latest
     steps:
@@ -71,7 +73,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: GloryWong/homebrew-tap
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.HOMEBREW_GITHUB_TOKEN }}
           ref: master
           path: homebrew-tap
 
