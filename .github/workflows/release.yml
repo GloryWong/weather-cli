@@ -46,10 +46,10 @@ jobs:
 
       - name: Compile
         run: |
-          deno compile --allow-net --allow-read --allow-write --no-check --target ${{ matrix.target }} --output weather-cli cli.ts
+          deno compile --allow-net --allow-read --allow-write --no-check --target ${{ matrix.target }} --output ./${{ matrix.target }}/weather-cli cli.ts
           echo "Compiled for ${{ matrix.target }}"
 
       - name: Upload binaries
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh release upload ${{ needs.release-please.outputs.tag_name }} weather-cli${{ contains(matrix.target, 'windows') && '.exe' || '' }}#${{ matrix.target }}_${{ needs.release-please.outputs.tag_name }}
+        run: gh release upload ${{ needs.release-please.outputs.tag_name }} ./${{ matrix.target }}/weather-cli${{ contains(matrix.target, 'windows') && '.exe' || '' }}#${{ matrix.target }}_${{ needs.release-please.outputs.tag_name }}
