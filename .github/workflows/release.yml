@@ -46,12 +46,12 @@ jobs:
 
       - name: Compile binary
         run: |
-          deno compile --allow-net --allow-read --allow-write --no-check --target ${{ matrix.target }} --output weather-cli.${{ matrix.target }}.${{ needs.release-please.outputs.tag_name }} cli.ts
+          deno compile --allow-net --allow-read --allow-write --no-check --target ${{ matrix.target }} --output weather-cli.${{ matrix.target }} cli.ts
           echo "Compiled for ${{ matrix.target }}"
 
       - name: Compress binary
         run: |
-          BIN_NAME=weather-cli.${{ matrix.target }}.${{ needs.release-please.outputs.tag_name }}${{ contains(matrix.target, 'windows') && '.exe' || '' }}
+          BIN_NAME=weather-cli.${{ matrix.target }}${{ contains(matrix.target, 'windows') && '.exe' || '' }}
           tar -czf ${BIN_NAME}.tar.gz $BIN_NAME
           ls -l ${BIN_NAME}.tar.gz
 
@@ -59,7 +59,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          ASSET_NAME=weather-cli.${{ matrix.target }}.${{ needs.release-please.outputs.tag_name }}${{ contains(matrix.target, 'windows') && '.exe' || '' }}.tar.gz
+          ASSET_NAME=weather-cli.${{ matrix.target }}${{ contains(matrix.target, 'windows') && '.exe' || '' }}.tar.gz
           gh release upload ${{ needs.release-please.outputs.tag_name }} $ASSET_NAME
   
   update-homebrew:
