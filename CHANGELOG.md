@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.9](https://github.com/GloryWong/weather-cli/compare/v1.0.8...v1.0.9) (2025-02-24)
+
+
+### Bug Fixes
+
+* **cli:** workflow - make binaries availabe in homebrew ([bd73163](https://github.com/GloryWong/weather-cli/commit/bd731637066548d328a06ac338be37988c9d7013))
+
 ## [1.0.8](https://github.com/GloryWong/weather-cli/compare/v1.0.7...v1.0.8) (2025-02-24)
 
 
