@@ -126,9 +126,8 @@ jobs:
       - name: Commit and Push Formula Changes
         run: |
           cd homebrew-tap
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "GloryWong"
+          git config user.email "glorywong1001@gmail.com"
           git add .
           git commit -m "Update weather-cli formula for release ${RELEASE_TAG}" || echo "No changes to commit."
-          echo "${{ secrets.HOMEBREW_GITHUB_TOKEN }}"
           git push https://GloryWong:${{ secrets.HOMEBREW_GITHUB_TOKEN }}@github.com/GloryWong/homebrew-tap.git HEAD:master
