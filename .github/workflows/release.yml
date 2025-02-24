@@ -86,18 +86,15 @@ jobs:
           # Update the version in the formula.
           sed -i "s/^  version \".*\"/  version \"${RELEASE_TAG}\"/" "${FORMULA_FILE}"
 
-          # Define an associative array to hold platform-specific details.
-          # The key is the asset suffix; the value is the checksum placeholder in your formula.
-          declare -A platforms
-          platforms=(
-            ["x86_64-apple-darwin"]="SHA256_X86_64_DARWIN_PLACEHOLDER"
-            ["aarch64-apple-darwin"]="SHA256_AARCH64_DARWIN_PLACEHOLDER"
-            ["x86_64-unknown-linux-gnu"]="SHA256_X86_64_LINUX_PLACEHOLDER"
-            ["aarch64-unknown-linux-gnu"]="SHA256_AARCH64_LINUX_PLACEHOLDER"
-          )
+          # Define an array for the platforms.
+          platforms=("x86_64-apple-darwin" "aarch64-apple-darwin" "x86_64-unknown-linux-gnu" "aarch64-unknown-linux-gnu")
 
-          # Loop through each platform, download the asset, compute checksum, and update the formula.
-          for platform in "${!platforms[@]}"; do
+          # Loop through each platform:
+          #  - Download the asset.
+          #  - Compute the SHA256 checksum.
+          #  - Update the URL line.
+          #  - Update the checksum on the line immediately following the URL.
+          for platform in "${platforms[@]}"; do
             ASSET="weather-cli.${platform}.tar.gz"
             URL="https://github.com/GloryWong/weather-cli/releases/download/${RELEASE_TAG}/${ASSET}"
             echo "Processing platform: ${platform}"
@@ -114,10 +111,13 @@ jobs:
             # a line containing ${platform}) which we replace.
             sed -i "s|url \".*${platform}.*\"|      url \"${URL}\"|" "${FORMULA_FILE}"
 
-            # Replace the checksum placeholder with the computed checksum.
-            # We use the placeholder defined for this platform.
-            PLACEHOLDER=${platforms[${platform}]}
-            sed -i "s/${PLACEHOLDER}/${CHECKSUM}/" "${FORMULA_FILE}"
+            # Replace the existing checksum:
+            # Look for the URL line that contains the platform to match the correct section.
+            # Then, go to the next line and substitute the sha256 checksum with the new value.
+            sed -i "/url \".*${platform}.*\"/{
+              n
+              s|sha256 \"[^\"]*\"|      sha256 \"${CHECKSUM}\"|
+            }" "${FORMULA_FILE}"
           done
 
           echo "Final updated formula:"
