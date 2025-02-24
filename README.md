@@ -58,15 +58,24 @@ weather --location
 To upgrade weather-cli to the latest version when a new release is available, simply run:
 
 ```bash
+brew update
 brew upgrade weather-cli
 ```
 
 ## Troubleshooting
 
 * Installation issues:
+  
   Ensure that you have correctly added the custom tap using:
+  
   ```bash
   brew tap GloryWong/homebrew-tap
+  ```
+  
+  You may need to update the formula in order to install the latest pacakge
+  ```bash
+  brew update
+  brew install weather-cli
   ```
 
 * General help
