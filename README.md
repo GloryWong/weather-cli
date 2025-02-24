@@ -26,7 +26,7 @@ After installation, the CLI tool will be available globally as the command weath
 For a list of available commands and options, run:
 
 ```bash
-weather-cli --help
+weather --help
 ```
 
 ### Get Current Weather
@@ -34,7 +34,7 @@ weather-cli --help
 To check the current weather(the location is based on the current ip), run:
 
 ```bash
-weather-cli
+weather
 ```
 
 ### Get Current Weather for a specific location
@@ -42,7 +42,7 @@ weather-cli
 To check the current weather for a specific location, run:
 
 ```bash
-weather-cli <latitude> <longitude>
+weather <latitude> <longitude>
 ```
 
 ### Get Current Location
@@ -50,7 +50,7 @@ weather-cli <latitude> <longitude>
 To check current location (based on the current ip), run:
 
 ```bash
-weather-cli --location
+weather --location
 ```
 
 ## Updating
@@ -72,7 +72,7 @@ brew upgrade weather-cli
 * General help
   Run:
   ```bash
-  weather-cli --help
+  weather --help
   ```
   to view usage instructions and available options.
 
