@@ -8,5 +8,6 @@
     "@std/assert": "jsr:@std/assert@1",
     "@std/fs": "jsr:@std/fs@^1.0.13",
     "hashJs": "https://deno.land/x/hash@v1.0.0/mod-hashjs.ts"
-  }
+  },
+  "nodeModulesDir": "auto"
 }
