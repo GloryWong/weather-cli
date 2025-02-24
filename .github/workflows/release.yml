@@ -30,13 +30,13 @@ jobs:
   upload-binaries:
     needs: release-please
     if: needs.release-please.outputs.release_created
-    name: Compile and upload binaries
+    name: Compile, compress, and upload binaries
     runs-on: ubuntu-latest
     strategy:
       matrix:
         target: [x86_64-pc-windows-msvc, x86_64-apple-darwin, aarch64-apple-darwin, x86_64-unknown-linux-gnu, aarch64-unknown-linux-gnu]
     steps:
-      - name: Checkout
+      - name: Checkout source
         uses: actions/checkout@v4
 
       - name: Setup Deno
@@ -44,12 +44,88 @@ jobs:
         with:
           deno-version: v2.x
 
-      - name: Compile
+      - name: Compile binary
         run: |
-          deno compile --allow-net --allow-read --allow-write --no-check --target ${{ matrix.target }} --output ./weather-cli.${{ matrix.target }} cli.ts
+          deno compile --allow-net --allow-read --allow-write --no-check --target ${{ matrix.target }} --output weather-cli.${{ matrix.target }} cli.ts
           echo "Compiled for ${{ matrix.target }}"
 
-      - name: Upload binaries
+      - name: Compress binary
+        run: |
+          BIN_NAME=weather-cli.${{ matrix.target }}.${{ needs.release-please.outputs.tag_name }}.${{ contains(matrix.target, 'windows') && '.exe' || '' }}
+          tar -czf ${BIN_NAME}.tar.gz $BIN_NAME
+          ls -l ${BIN_NAME}.tar.gz
+
+      - name: Upload compressed binaries
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh release upload ${{ needs.release-please.outputs.tag_name }} ./weather-cli.${{ matrix.target }}${{ contains(matrix.target, 'windows') && '.exe' || '' }}#${{ matrix.target }}_${{ needs.release-please.outputs.tag_name }}
+        run: |
+          ASSET_NAME=weather-cli.${{ matrix.target }}.${{ needs.release-please.outputs.tag_name }}.${{ contains(matrix.target, 'windows') && '.exe' || '' }}.tar.gz
+          gh release upload ${{ needs.release-please.outputs.tag_name }} $ASSET_NAME
+  
+  update-homebrew:
+    needs: upload-binaries
+    if: needs.release-please.outputs.release_created
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Homebrew Tap Repository
+        uses: actions/checkout@v4
+        with:
+          repository: GloryWong/homebrew-tap
+          token: ${{ secrets.GITHUB_TOKEN }}
+          ref: master
+          path: homebrew-tap
+
+      - name: Update Homebrew Formula for all platforms
+        run: |
+          cd homebrew-tap/Formula
+          FORMULA_FILE="weather-cli.rb"
+          RELEASE_TAG="${{ needs.release-please.outputs.tag_name }}"
+
+          # Update the version in the formula.
+          sed -i "s/^  version \".*\"/  version \"${RELEASE_TAG}\"/" "${FORMULA_FILE}"
+
+          # Define an associative array to hold platform-specific details.
+          # The key is the asset suffix; the value is the checksum placeholder in your formula.
+          declare -A platforms
+          platforms=(
+            ["x86_64-apple-darwin"]="SHA256_X86_64_DARWIN_PLACEHOLDER"
+            ["aarch64-apple-darwin"]="SHA256_AARCH64_DARWIN_PLACEHOLDER"
+            ["x86_64-unknown-linux-gnu"]="SHA256_X86_64_LINUX_PLACEHOLDER"
+            ["aarch64-unknown-linux-gnu"]="SHA256_AARCH64_LINUX_PLACEHOLDER"
+          )
+
+          # Loop through each platform, download the asset, compute checksum, and update the formula.
+          for platform in "${!platforms[@]}"; do
+            ASSET="weather-cli.${platform}.tar.gz"
+            URL="https://github.com/GloryWong/weather-cli/releases/download/${RELEASE_TAG}/${ASSET}"
+            echo "Processing platform: ${platform}"
+            
+            # Download the asset
+            curl -L -o "${ASSET}" "${URL}"
+            
+            # Compute the SHA256 checksum
+            CHECKSUM=$(sha256sum "${ASSET}" | awk '{print $1}')
+            echo "Checksum for ${platform}: ${CHECKSUM}"
+
+            # Update the URL line in the formula for this platform.
+            # This example assumes that your formula has a unique URL line reference (e.g.,
+            # a line containing ${platform}) which we replace.
+            sed -i "s|url \".*${platform}.*\"|      url \"${URL}\"|" "${FORMULA_FILE}"
+
+            # Replace the checksum placeholder with the computed checksum.
+            # We use the placeholder defined for this platform.
+            PLACEHOLDER=${platforms[${platform}]}
+            sed -i "s/${PLACEHOLDER}/${CHECKSUM}/" "${FORMULA_FILE}"
+          done
+
+          echo "Final updated formula:"
+          cat "${FORMULA_FILE}"
+
+      - name: Commit and Push Formula Changes
+        run: |
+          cd homebrew-tap
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "Update weather-cli formula for release ${RELEASE_TAG}" || echo "No changes to commit."
+          git push
