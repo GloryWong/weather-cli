@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.15](https://github.com/GloryWong/weather-cli/compare/v1.0.14...v1.0.15) (2025-02-24)
+
+
+### Bug Fixes
+
+* **cli:** commit only the formula file ([8b1d59d](https://github.com/GloryWong/weather-cli/commit/8b1d59d044031b26a6f19603f9a4ff78761d0129))
+
 ## [1.0.14](https://github.com/GloryWong/weather-cli/compare/v1.0.13...v1.0.14) (2025-02-24)
 
 
