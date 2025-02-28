@@ -6,8 +6,7 @@
   },
   "imports": {
     "@std/assert": "jsr:@std/assert@1",
-    "@std/fs": "jsr:@std/fs@^1.0.13",
-    "hashJs": "https://deno.land/x/hash@v1.0.0/mod-hashjs.ts"
-  },
-  "nodeModulesDir": "auto"
+    "@std/crypto": "jsr:@std/crypto@^1.0.4",
+    "@std/fs": "jsr:@std/fs@^1.0.13"
+  }
 }

@@ -1,7 +1,7 @@
 import { getCacheFilePath } from "./getCacheFilePath.ts";
 
 export async function writeCache(url: string, data: any) {
-  const cacheFile = getCacheFilePath(url);
+  const cacheFile = await getCacheFilePath(url);
   const cacheEntry = { data, timestamp: Date.now() };
   
   try {
