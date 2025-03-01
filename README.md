@@ -1,6 +1,7 @@
 # Weather CLI
 
-A simple command-line tool for checking current weather conditions and forecasts directly from your terminal.
+A simple command-line tool for checking current weather conditions and forecasts
+directly from your terminal.
 
 ## Installation
 
@@ -19,7 +20,8 @@ brew install weather-cli
 
 ## Usage
 
-After installation, the CLI tool will be available globally as the command weather-cli.
+After installation, the CLI tool will be available globally as the command
+weather-cli.
 
 ### Display Help
 
@@ -55,7 +57,8 @@ weather --location
 
 ## Updating
 
-To upgrade weather-cli to the latest version when a new release is available, simply run:
+To upgrade weather-cli to the latest version when a new release is available,
+simply run:
 
 ```bash
 brew update
@@ -64,22 +67,21 @@ brew upgrade weather-cli
 
 ## Troubleshooting
 
-* Installation issues:
-  
+- Installation issues:
+
   Ensure that you have correctly added the custom tap using:
-  
+
   ```bash
   brew tap GloryWong/homebrew-tap
   ```
-  
+
   You may need to update the formula in order to install the latest pacakge
   ```bash
   brew update
   brew install weather-cli
   ```
 
-* General help
-  Run:
+- General help Run:
   ```bash
   weather --help
   ```
@@ -87,8 +89,11 @@ brew upgrade weather-cli
 
 ## Contributing
 
-Contributions are welcome! If you have ideas, bug fixes, or improvements, please Open an issue or submit a pull request on the [GitHub repository](https://github.com/GloryWong/weather-cli).
+Contributions are welcome! If you have ideas, bug fixes, or improvements, please
+Open an issue or submit a pull request on the
+[GitHub repository](https://github.com/GloryWong/weather-cli).
 
 ## License
 
-This project is licensed under the MIT License. See the LICENSE file for more details.
+This project is licensed under the MIT License. See the LICENSE file for more
+details.

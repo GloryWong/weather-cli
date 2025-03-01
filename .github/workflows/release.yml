@@ -34,7 +34,13 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        target: [x86_64-pc-windows-msvc, x86_64-apple-darwin, aarch64-apple-darwin, x86_64-unknown-linux-gnu, aarch64-unknown-linux-gnu]
+        target: [
+          x86_64-pc-windows-msvc,
+          x86_64-apple-darwin,
+          aarch64-apple-darwin,
+          x86_64-unknown-linux-gnu,
+          aarch64-unknown-linux-gnu,
+        ]
     steps:
       - name: Checkout source
         uses: actions/checkout@v4
@@ -61,7 +67,7 @@ jobs:
         run: |
           ASSET_NAME=weather-cli.${{ matrix.target }}${{ contains(matrix.target, 'windows') && '.exe' || '' }}.tar.gz
           gh release upload ${{ needs.release-please.outputs.tag_name }} $ASSET_NAME
-  
+
   update-homebrew:
     needs:
       - release-please
@@ -98,10 +104,10 @@ jobs:
             ASSET="weather-cli.${platform}.tar.gz"
             URL="https://github.com/GloryWong/weather-cli/releases/download/${RELEASE_TAG}/${ASSET}"
             echo "Processing platform: ${platform}"
-            
+
             # Download the asset
             curl -L -o "${ASSET}" "${URL}"
-            
+
             # Compute the SHA256 checksum
             CHECKSUM=$(sha256sum "${ASSET}" | awk '{print $1}')
             echo "Checksum for ${platform}: ${CHECKSUM}"
