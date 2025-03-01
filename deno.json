@@ -6,6 +6,7 @@
   },
   "imports": {
     "@std/assert": "jsr:@std/assert@1",
+    "@std/cli": "jsr:@std/cli@^1.0.13",
     "@std/crypto": "jsr:@std/crypto@^1.0.4",
     "@std/fs": "jsr:@std/fs@^1.0.13"
   },

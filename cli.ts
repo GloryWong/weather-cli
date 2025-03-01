@@ -1,55 +1,42 @@
 import { fetchWeatherData } from './utils/fetchWeatherData.ts'
 import { fetchLocationData } from './utils/fetchLocationData.ts'
 import { displayWeather } from './utils/displayWeather.ts'
-
-// CLI Arguments
-const args = Deno.args
+import { parseArgs } from '@std/cli'
 
 async function main() {
-  if (args.includes('--help') || args.includes('-h')) {
+  const args = parseArgs(Deno.args, {
+    boolean: ['location', 'force', 'help'],
+    alias: {
+      'force': 'f',
+      'help': 'h'
+    }
+  })
+
+  if (args['help']) {
     console.log(`
 Usage: weather [options]
 
+Fetch weather based on IP
+
 Options:
-  --weather <lat> <lon>   Fetch weather data for given latitude & longitude
-  --location              Fetch location data based on IP
-  --force, -f             Skip cache and fetch new data
-  --help, -h              Show this help message
+  --location                Fetch location data based on IP
+  --force, -f               Skip cache and fetch new data
+  --help, -h                Show this help message
 
 Note: data is cached for 5 minutes. Use --force to skip cache.
 `)
     return
   }
 
-  const force = args.includes('--force') || args.includes('-f')
+  const force = args['force']
 
-  if (args.includes('--location')) {
+  if (args['location']) {
     const location = await fetchLocationData(force)
     console.log('📍 Your Location:')
     console.log(`City: ${location.city}`)
     console.log(`Region: ${location.regionName}`)
     console.log(`Country: ${location.country}`)
     console.log(`Latitude: ${location.lat}, Longitude: ${location.lon}`)
-    return
-  }
-
-  if (args.includes('--weather')) {
-    const index = args.indexOf('--weather')
-    if (index === -1 || index + 2 >= args.length) {
-      console.error('❌ Please provide latitude and longitude.')
-      return
-    }
-
-    const lat = parseFloat(args[index + 1])
-    const lon = parseFloat(args[index + 2])
-
-    if (isNaN(lat) || isNaN(lon)) {
-      console.error('❌ Invalid latitude or longitude.')
-      return
-    }
-
-    const weather = await fetchWeatherData(lat, lon, force)
-    displayWeather(weather)
     return
   }
 

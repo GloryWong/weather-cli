@@ -2,6 +2,7 @@
   "version": "4",
   "specifiers": {
     "jsr:@std/assert@1": "1.0.11",
+    "jsr:@std/cli@^1.0.13": "1.0.13",
     "jsr:@std/crypto@^1.0.4": "1.0.4",
     "jsr:@std/fs@^1.0.13": "1.0.13",
     "jsr:@std/internal@^1.0.5": "1.0.5",
@@ -14,6 +15,9 @@
       "dependencies": [
         "jsr:@std/internal"
       ]
+    },
+    "@std/cli@1.0.13": {
+      "integrity": "5db2d95ab2dca3bca9fb6ad3c19908c314e93d6391c8b026725e4892d4615a69"
     },
     "@std/crypto@1.0.4": {
       "integrity": "cee245c453bd5366207f4d8aa25ea3e9c86cecad2be3fefcaa6cb17203d79340"
@@ -136,6 +140,7 @@
   "workspace": {
     "dependencies": [
       "jsr:@std/assert@1",
+      "jsr:@std/cli@^1.0.13",
       "jsr:@std/crypto@^1.0.4",
       "jsr:@std/fs@^1.0.13"
     ]
