@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/GloryWong/weather-cli/compare/v1.1.0...v1.1.1) (2025-03-01)
+
+
+### Bug Fixes
+
+* use @std/cli parse args && remove weather fetch based on location ([735dd0d](https://github.com/GloryWong/weather-cli/commit/735dd0df31d48fb621c477e62e144be00c940e31))
+
 ## [1.1.0](https://github.com/GloryWong/weather-cli/compare/v1.0.18...v1.1.0) (2025-02-24)
 
 
