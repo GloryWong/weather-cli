@@ -8,8 +8,8 @@ async function main() {
     boolean: ['location', 'force', 'help'],
     alias: {
       'force': 'f',
-      'help': 'h'
-    }
+      'help': 'h',
+    },
   })
 
   if (args['help']) {
