@@ -5,10 +5,11 @@ import { parseArgs } from '@std/cli'
 
 async function main() {
   const args = parseArgs(Deno.args, {
-    boolean: ['location', 'force', 'help'],
+    boolean: ['location', 'force', 'help', 'version'],
     alias: {
       'force': 'f',
       'help': 'h',
+      'version': 'v'
     },
   })
 
@@ -19,12 +20,19 @@ Usage: weather [options]
 Fetch weather based on IP
 
 Options:
-  --location                Fetch location data based on IP
-  --force, -f               Skip cache and fetch new data
-  --help, -h                Show this help message
+      --location                Fetch location data based on IP
+  -f, --force                   Skip cache and fetch new data
+  -h, --help                    Show this help message
+  -v, --version                 Show current version
 
 Note: data is cached for 5 minutes. Use --force to skip cache.
 `)
+    return
+  }
+
+  if (args['version']) {
+    const version = await Deno.readTextFile('version.txt')
+    console.log(version.trim())
     return
   }
 

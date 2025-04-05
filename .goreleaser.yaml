@@ -12,6 +12,7 @@ builds:
       - --allow-sys
       - --allow-env
       - --no-check
+      - --include=version.txt
 
 archives:
   - formats: [tar.gz]
