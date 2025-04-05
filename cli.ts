@@ -2,6 +2,7 @@ import { fetchWeatherData } from './utils/fetchWeatherData.ts'
 import { fetchLocationData } from './utils/fetchLocationData.ts'
 import { displayWeather } from './utils/displayWeather.ts'
 import { parseArgs } from '@std/cli'
+import { join } from '@std/path'
 
 async function main() {
   const args = parseArgs(Deno.args, {
@@ -31,7 +32,7 @@ Note: data is cached for 5 minutes. Use --force to skip cache.
   }
 
   if (args['version']) {
-    const version = await Deno.readTextFile('version.txt')
+    const version = await Deno.readTextFile(join(import.meta.dirname ?? './', 'version.txt'))
     console.log(version.trim())
     return
   }
