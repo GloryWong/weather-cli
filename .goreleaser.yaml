@@ -1,0 +1,35 @@
+version: 2
+report_sizes: true
+
+builds:
+  - builder: deno
+    binary: weather
+    main: cli.ts
+    flags:
+      - --allow-net
+      - --allow-read
+      - --allow-write
+      - --allow-sys
+      - --allow-env
+      - --no-check
+
+archives:
+  - formats: [tar.gz]
+    format_overrides:
+      - goos: windows
+        formats: [zip]
+
+brews:
+  - url_template: 'https://github.com/GloryWong/weather-cli/releases/download/{{ .Tag }}/{{ .ArtifactName }}'
+    directory: Formula
+    # Caveats for the user of your binary.
+    caveats: weather --help
+    homepage: 'https://github.com/GloryWong/weather-cli'
+    description: A CLI tool to upload or download files to or from GitHub Gist
+    license: MIT
+    test: system "#{bin}/weather --version"
+    # Repository to push the generated files to.
+    repository:
+      owner: GloryWong
+      name: homebrew-tap
+      token: '{{ .Env.HOMEBREW_GITHUB_TOKEN }}'

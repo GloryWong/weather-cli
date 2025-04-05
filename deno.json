@@ -1,14 +1,16 @@
 {
   "tasks": {
-    "run": "deno run --allow-net --allow-read --allow-write cli.ts",
+    "run": "deno run --allow-net --allow-env --allow-sys --allow-read --allow-write cli.ts",
     "test": "deno test --allow-read --allow-write --no-check",
-    "compile": "deno compile --allow-net --allow-read --allow-write --no-check --output .bin/weather-cli cli.ts"
+    "compile": "deno compile --allow-net --allow-env --allow-sys --allow-read --allow-write --no-check --output .bin/weather-cli cli.ts"
   },
   "imports": {
     "@std/assert": "jsr:@std/assert@1",
     "@std/cli": "jsr:@std/cli@^1.0.13",
     "@std/crypto": "jsr:@std/crypto@^1.0.4",
-    "@std/fs": "jsr:@std/fs@^1.0.13"
+    "@std/fs": "jsr:@std/fs@^1.0.13",
+    "@std/path": "jsr:@std/path@^1.0.8",
+    "env-paths": "npm:env-paths@^3.0.0"
   },
   "exclude": ["CHANGELOG.md"],
   "fmt": {

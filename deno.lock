@@ -7,6 +7,7 @@
     "jsr:@std/fs@^1.0.13": "1.0.13",
     "jsr:@std/internal@^1.0.5": "1.0.5",
     "jsr:@std/path@^1.0.8": "1.0.8",
+    "npm:env-paths@3": "3.0.0",
     "npm:hash.js@1.1.7": "1.1.7"
   },
   "jsr": {
@@ -36,6 +37,9 @@
     }
   },
   "npm": {
+    "env-paths@3.0.0": {
+      "integrity": "sha512-dtJUTepzMW3Lm/NPxRf3wP4642UWhjL2sQxc+ym2YMj1m/H2zDNQOlezafzkHwn6sMstjHTwG6iQQsctDW/b1A=="
+    },
     "hash.js@1.1.7": {
       "integrity": "sha512-taOaskGt4z4SOANNseOviYDvjEJinIkRgmp7LbKP2YTTmVxWBl87s/uzK9r+44BclBSp2X7K1hqeNfz9JbBeXA==",
       "dependencies": [
@@ -142,7 +146,9 @@
       "jsr:@std/assert@1",
       "jsr:@std/cli@^1.0.13",
       "jsr:@std/crypto@^1.0.4",
-      "jsr:@std/fs@^1.0.13"
+      "jsr:@std/fs@^1.0.13",
+      "jsr:@std/path@^1.0.8",
+      "npm:env-paths@3"
     ]
   }
 }

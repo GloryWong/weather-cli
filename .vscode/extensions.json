@@ -3,7 +3,6 @@
     "dbaeumer.vscode-eslint",
     "usernamehw.errorlens",
     "streetsidesoftware.code-spell-checker",
-    "antfu.file-nesting",
     "denoland.vscode-deno"
   ],
   "unwantedRecommendations": [
