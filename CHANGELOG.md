@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.2.0](https://github.com/GloryWong/weather-cli/compare/v1.1.1...v1.2.0) (2025-04-05)
+
+
+### Features
+
+* add version ([3e3b2ca](https://github.com/GloryWong/weather-cli/commit/3e3b2ca608a7fe6904273c0d8891914ce56725df))
+* normalize cache dir && use goreleaser ci ([4fbee97](https://github.com/GloryWong/weather-cli/commit/4fbee97aceda4813cd1077ffa95ab0b035a5b208))
+
 ## [1.1.1](https://github.com/GloryWong/weather-cli/compare/v1.1.0...v1.1.1) (2025-03-01)
 
 
